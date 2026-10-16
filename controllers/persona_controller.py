@@ -12,16 +12,16 @@ class PersonaController:
         persona=Personas(identificacion, nombre, correo)
         self.personas.append(persona)
         
-    def añadir_estudiante(self, identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio):
-        estudiante=Estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio)
+    def añadir_estudiante(self, identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado):
+        estudiante=Estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado)
         self.personas.append(estudiante)
         
-    def añadir_docente(self, identificacion, nombre, correo, num_empleado, facultad, tipo_contratacion, horas_semanales):
-        docente=Docente(identificacion, nombre, correo, num_empleado, facultad, tipo_contratacion, horas_semanales)
+    def añadir_docente(self, identificacion, nombre, correo, NumEmpleado, Facultad, Contratacion, Hsemanales):
+        docente=Docente(identificacion, nombre, correo, NumEmpleado, Facultad, Contratacion, Hsemanales)
         self.personas.append(docente)
         
-    def añadir_administrativo(self, identificacion, nombre, correo, num_empleado, dependencia, cargo, jornada):
-        administrativo=Administrativo(identificacion, nombre, correo, num_empleado, dependencia, cargo, jornada)
+    def añadir_administrativo(self, identificacion, nombre, correo, numero_empleado, dependencia, cargo, jornada):
+        administrativo=Administrativo(identificacion, nombre, correo, numero_empleado, dependencia, cargo, jornada)
         self.personas.append(administrativo)
         
     def get_persona(self):
