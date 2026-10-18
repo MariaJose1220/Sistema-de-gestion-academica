@@ -44,7 +44,6 @@ class Programa:
 
      def mostrar_informacion(self):
             return ("Programa Academico\n"
-                   f"{super().mostrar_informacion()}\n"
                    f"Código del programa: {self.get_codigo()}\n"
                    f"Nombre del programa: {self.get_nombre()}\n"
                    f"Facultad: {self.get_Facultad()}\n"
