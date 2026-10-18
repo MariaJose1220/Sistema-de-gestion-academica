@@ -1,4 +1,6 @@
 from controllers.persona_controller import PersonaController
+from controllers.programa_controller import ProgramaController
+from models.Programa import Programa
 from models.personas import Personas
 
 def mostrar_personas(persona_controller):
@@ -13,14 +15,14 @@ def mostrar_personas(persona_controller):
         print(persona.realizar_actividad_principal())
         print()
 
-# def elegir_programa (lista):
-#     print("Programa al que pertenece: ")
-#     for i, programa in enumerate(lista, start=1):
-#         print(f"{i}. {ProgramasAcademicos.get_nombre(programa)}")
-#     while True:
-#         opcion = int(input("Elija una opción (el número): "))
-#         if 1 <= opcion <= len(lista):
-#             return lista[opcion - 1]
+def elegir_programa (lista):
+    print("Programa al que pertenece: ")
+    for i, programa in enumerate(lista, start=1):
+        print(f"{i}. {Programa.get_nombre(programa)}")
+    while True:
+        opcion = int(input("Elija una opción (el número): "))
+        if 1 <= opcion <= len(lista):
+            return lista[opcion - 1]
 
 def elegir_persona (lista):
     print("Personas agregadas: ")
@@ -34,7 +36,7 @@ def elegir_persona (lista):
 def main():
     
     persona_controller = PersonaController()
-    #programa_controller = ProgramaController()
+    programa_controller = ProgramaController()
     #asignatura_controller = AsignaturaController()
     
     while True:
@@ -53,33 +55,33 @@ def main():
             option = input("Slecciona una opción: ")
             
             match option:
-                # case "1":
-                #     codigo=input("Ingresa el código del programa: ")
-                #     nombre = input("Ingrese el nombre del programa: ")
-                #     facultad = input("Ingrese el nombre de la facultad: ")
-                #     semestres = int(input("Ingrese el número de semestres: "))
+                case "1":
+                    codigo=input("Ingresa el código del programa: ")
+                    nombre = input("Ingrese el nombre del programa: ")
+                    Facultad = input("Ingrese el nombre de la facultad: ")
+                    NumeroSemestres = int(input("Ingrese el número de semestres: "))
                     
-                #     programa_controller.añadir_programa(codigo, nombre, facultad, semestres)
-                #     print("Programa agregado con éxito")     
+                    programa_controller.añadir_programa(codigo, nombre, Facultad, NumeroSemestres)
+                    print("Programa agregado con éxito")     
     
-                # case "2":
-                #     if not programa_controller.get_programa():
-                #         print("Primero debe registrar al menos un programa académico.")
-                #         return
+                case "2":
+                    if not programa_controller.get_programa():
+                        print("Primero debe registrar al menos un programa académico.")
+                        return
     
                 case "3":
-                    # if not programa_controller.get_programa():
-                    #     print("Primero debe registrar al menos un programa académico.")
-                    #     return
+                    if not programa_controller.get_programa():
+                        print("Primero debe registrar al menos un programa académico.")
+                        return
                     identificacion = input("Ingresa la identificación del estudiante: ")
                     nombre = input("Ingresa el nombre del estudiante: ")
                     correo = input("Ingrese el correo del estudiante: ")
                     codigo_estudiantil = input("Ingrese el código estudiantil del estudiante: ")
-                    #programa = elegir_programa(programa_controller.get_programa())
+                    programa = elegir_programa(programa_controller.get_programa())
                     semestre = int(input("Ingrese el semestre en el que se encuentra: "))
                     promedio_acumulado = float(input("Ingrese el promedio acumulado: "))
                     
-                    persona_controller.añadir_estudiante(identificacion, nombre, correo, codigo_estudiantil, """programa""", semestre, promedio_acumulado)
+                    persona_controller.añadir_estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado)
                     print("Estudiante agregado con éxito")
                     
                 case "4":
