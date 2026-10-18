@@ -45,7 +45,7 @@ class Asignatura:
                        raise ValueError("La asignatura debe pertenecer a un programa académico existente")
 
      def mostrar_informacion(self):
-            return ("Agisnatura\n"
+            return ("Asignatura\n"
                    f"Código de la Asignatura: {self.get_codigoA()}\n"
                    f"Nombre de la Asignatura: {self.get_nombreA()}\n"
                    f"Numero de Creditos: {self.get_NumCreditos()}\n"
