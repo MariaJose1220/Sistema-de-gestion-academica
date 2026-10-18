@@ -1,27 +1,27 @@
 class Asignatura:
 
-     def __init__(self, codigo, nombre, NumCreditos, ProgramaAcademico):
-          self.set_codigo(codigo)
-          self.set_nombre(nombre)
+     def __init__(self, codigoA, nombreA, NumCreditos, ProgramaAcademico):
+          self.set_codigo(codigoA)
+          self.set_nombre(nombreA)
           self.set_NumCreditos(NumCreditos)
           self.set_ProgramaAcademico(ProgramaAcademico)
 
-     def get_codigo(self):
-          return self._codigo
+     def get_codigoA(self):
+          return self._codigoA
 
-     def set_codigo(self, codigo):
-        if(codigo != ""):
-               self._codigo = codigo
+     def set_codigo(self, codigoA):
+        if(codigoA != ""):
+               self._codigoA = codigoA
         else:
                raise ValueError("El codigo no puede estar vacio")
 
 
-     def get_nombre(self):
-              return self._nombre
+     def get_nombreA(self):
+              return self._nombreA
     
-     def set_nombre(self, nombre):
-            if(nombre != ""):
-                   self._nombre = nombre
+     def set_nombreA(self, nombreA):
+            if(nombreA != ""):
+                   self._nombreA = nombreA
             else:
                    raise ValueError("La nombre de la asignatura no puede estar vacio")
 
@@ -43,3 +43,10 @@ class Asignatura:
                        self._ProgramaAcademico = ProgramaAcademico
                 else:
                        raise ValueError("El programa academico no puede estar vacio")
+
+     def mostrar_informacion(self):
+            return ("Agisnatura\n"
+                   f"Código de la Asignatura: {self.get_codigoA()}\n"
+                   f"Nombre de la Asignatura: {self.get_nombreA()}\n"
+                   f"Numero de Creditos: {self.get_NumCreditos()}\n"
+                   f"Programa academico: {self.get_ProgramaAcademico()}\n")
