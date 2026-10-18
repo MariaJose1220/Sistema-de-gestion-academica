@@ -5,7 +5,7 @@ FICTICIOS y muestra, en orden, cada una de las pruebas que pide el documento,
 sin que el usuario tenga que escribir los datos a mano.
 """
 
-from models.Programa import Programa
+from models.programa import Programa
 from models.Asignatura import Asignatura
 from models.estudiante import Estudiante
 from models.docente import Docente
@@ -71,7 +71,7 @@ def ejecutar_demostracion():
     for asignatura in asignaturas:
         print(asignatura.mostrar_informacion() + "\n")
     print("Consulta con métodos get_:")
-    print(f"  Créditos de {poo.get_nombre()}: {poo.get_NumCreditos()}")
+    print(f"  Créditos de {poo.get_nombreA()}: {poo.get_NumCreditos()}")
     print(f"  Correo de {est_laura.get_nombre()}: {est_laura.get_correo()}")
     print(f"  Semestre de {est_andres.get_nombre()}: {est_andres.get_semestre()}")
 

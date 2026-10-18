@@ -1,4 +1,4 @@
-from models.Programa import Programa
+from models.programa import Programa
 
 class Asignatura:
 
