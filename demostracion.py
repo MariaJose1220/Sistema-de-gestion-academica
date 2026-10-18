@@ -71,7 +71,7 @@ def ejecutar_demostracion():
     for asignatura in asignaturas:
         print(asignatura.mostrar_informacion() + "\n")
     print("Consulta con métodos get_:")
-    print(f"  Créditos de {poo.get_nombre()}: {poo.get_NumCreditos()}")
+    print(f"  Créditos de {poo.get_nombreA()}: {poo.get_NumCreditos()}")
     print(f"  Correo de {est_laura.get_nombre()}: {est_laura.get_correo()}")
     print(f"  Semestre de {est_andres.get_nombre()}: {est_andres.get_semestre()}")
 
