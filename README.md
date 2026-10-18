@@ -13,10 +13,17 @@ En nuestra carpeta encontramos un archivo principal main.py y dos carpetas llama
 
 * controllers
     - persona_controller.py
+    - asignatura_controller.py
+    - programa_controller.py
 * models
     - administrativo.py
     - docente.py
     - estudiante.py
     - personas.py
+    - personas.py
+    - Programa.py
 * main.py
 * README.md
+* demostracion.py
+
+  
