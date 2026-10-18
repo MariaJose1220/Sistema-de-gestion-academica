@@ -65,15 +65,13 @@ def main():
             print("\n Opciones")
             print("1. Agregar programa académico")
             print("2. Agregar asignatura")
-            print("3. Agregar estudiante")
-            print("4. Agregar docente")
-            print("5. Agregar administrativo")
-            print("6. Mostrar programas académicos")
-            print("7. Mostrar personas")
-            print("8. Mostrar asignaturas")
-            print("9. Cambiar correo de cualquier persona")
-            print("10. Salir")
-            print("11. Ejecutar demostracion")
+            print("3. Agregar una persona")
+            print("4. Mostrar programas académicos")
+            print("5. Mostrar personas")
+            print("6. Mostrar asignaturas")
+            print("7. Cambiar correo de cualquier persona")
+            print("8. Salir")
+            print("9. Ejecutar demostracion")
             
             option = input("Selecciona una opción: ")
             
@@ -100,55 +98,66 @@ def main():
                     print("Asignatura agregada con éxito")
     
                  case "3":
-                    if not programa_controller.get_programa():
-                        print("Primero debe registrar al menos un programa académico.")
-                        continue
+                    print("Papel de la persona a ingresar")
+                    print("1. Estudiante")
+                    print("1. Docente")
+                    print("1. Administrativos")
 
-                    identificacion = input("Ingresa la identificación del estudiante: ")
-                    nombre = input("Ingresa el nombre del estudiante: ")
-                    correo = input("Ingrese el correo del estudiante: ")
-                    codigo_estudiantil = input("Ingrese el código estudiantil del estudiante: ")
-                    programa = elegir_programa(programa_controller.get_programa())
-                    semestre = int(input("Ingrese el semestre en el que se encuentra: "))
-                    promedio_acumulado = float(input("Ingrese el promedio acumulado: "))
+                    papelpersona = input("Seleccione la persona que desea ingresar: ")
+
+                    if papelpersona == "1":
+                        if not programa_controller.get_programa():
+                            print("Primero debe registrar al menos un programa académico.")
+                            continue
+
+                        identificacion = input("Ingresa la identificación del estudiante: ")
+                        nombre = input("Ingresa el nombre del estudiante: ")
+                        correo = input("Ingrese el correo del estudiante: ")
+                        codigo_estudiantil = input("Ingrese el código estudiantil del estudiante: ")
+                        programa = elegir_programa(programa_controller.get_programa())
+                        semestre = int(input("Ingrese el semestre en el que se encuentra: "))
+                        promedio_acumulado = float(input("Ingrese el promedio acumulado: "))
                     
-                    persona_controller.añadir_estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado)
-                    print("Estudiante agregado con éxito")
+                        persona_controller.añadir_estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado)
+                        print("Estudiante agregado con éxito")
+
+                    elif papelpersona == "2":
+                        identificacion = input("Ingresa la identificación del docente: ")
+                        nombre = input("Ingresa el nombre del docente: ")
+                        correo = input("Ingrese el correo del docente: ")
+                        NumEmpleado = input("Ingrese el número de empleado: ")
+                        Facultad = input("Ingrese el nombre de la facultad: ")
+                        Contratacion = input("Ingrese el tipo de contratación: ")
+                        Hsemanales = int(input("Ingrese las horas semanales: "))
                     
-                 case "4":
-                    identificacion = input("Ingresa la identificación del docente: ")
-                    nombre = input("Ingresa el nombre del docente: ")
-                    correo = input("Ingrese el correo del docente: ")
-                    NumEmpleado = input("Ingrese el número de empleado: ")
-                    Facultad = input("Ingrese el nombre de la facultad: ")
-                    Contratacion = input("Ingrese el tipo de contratación: ")
-                    Hsemanales = int(input("Ingrese las horas semanales: "))
+                        persona_controller.añadir_docente(identificacion, nombre, correo, NumEmpleado, Facultad, Contratacion, Hsemanales)
+                        print("Docente agregado con éxito")
+
+                    elif papelpersona == "3":
+                        identificacion = input("Ingresa la identificación del administrativo: ")
+                        nombre = input("Ingresa el nombre del administrativo: ")
+                        correo = input("Ingrese el correo del administrativo: ")
+                        numero_empleado = input("Ingrese el número de empleado: ")
+                        dependencia = input("Ingrese la dependencia: ")
+                        cargo = input("Ingrese el cargo: ")
+                        jornada = input("Ingrese la jornada: ")
                     
-                    persona_controller.añadir_docente(identificacion, nombre, correo, NumEmpleado, Facultad, Contratacion, Hsemanales)
-                    print("Docente agregado con éxito")
-                
-                 case "5":
-                    identificacion = input("Ingresa la identificación del administrativo: ")
-                    nombre = input("Ingresa el nombre del administrativo: ")
-                    correo = input("Ingrese el correo del administrativo: ")
-                    numero_empleado = input("Ingrese el número de empleado: ")
-                    dependencia = input("Ingrese la dependencia: ")
-                    cargo = input("Ingrese el cargo: ")
-                    jornada = input("Ingrese la jornada: ")
-                    
-                    persona_controller.añadir_administrativo(identificacion, nombre, correo, numero_empleado, dependencia, cargo, jornada)
-                    print("Administrativo agregado con éxito")
+                        persona_controller.añadir_administrativo(identificacion, nombre, correo, numero_empleado, dependencia, cargo, jornada)
+                        print("Administrativo agregado con éxito")
+
+                    else:
+                        print("Ingrese una opcion valida")
     
-                 case "6":
+                 case "4":
                     mostrar_programas(programa_controller)
     
-                 case "7":
+                 case "5":
                     mostrar_personas(persona_controller)
     
-                 case "8":
+                 case "6":
                     mostrar_asignaturas(asignatura_controller)
                 
-                 case "9":
+                 case "7":
                     if not persona_controller.get_persona():
                         print("No hay personas registradas")
                     else:
@@ -157,11 +166,11 @@ def main():
                         print()
                         print(f"Correo actual: {persona.get_correo()}")
                     
-                 case "10":
+                 case "8":
                     print(f"Vuelve pronto \n")
                     break
 
-                 case "11":
+                 case "9":
                     ejecutar_demostracion()
                 
                  case _:
