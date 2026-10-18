@@ -1,5 +1,10 @@
 from controllers.persona_controller import PersonaController
 from controllers.programa_controller import ProgramaController
+<<<<<<< HEAD
+=======
+from controllers.asignatura_controller import AsignaturaController
+from models.Programa import Programa
+>>>>>>> 2743947aef9731d3c4a2babb0f3ba46d791725a3
 from models.personas import Personas
 
 def mostrar_personas(persona_controller):
@@ -12,6 +17,26 @@ def mostrar_personas(persona_controller):
     for persona in personas:
         print(persona.mostrar_informacion())  
         print(persona.realizar_actividad_principal())
+        print()
+
+def mostrar_programas(programa_controller):
+    programas = programa_controller.get_programa()
+    print()
+    if not programas:
+        print("No existen programas registrados")
+        return
+    for programa in programas:
+        print(programa.mostrar_informacion())
+        print()
+        
+def mostrar_asignaturas(asignatura_controller):
+    asignaturas = asignatura_controller.get_asignatura()
+    print()
+    if not asignaturas:
+        print("No existen asignaturas registradas")
+        return
+    for asignatura in asignaturas:
+        print(asignatura.mostrar_informacion())
         print()
 
 def elegir_programa (lista):
@@ -36,7 +61,7 @@ def main():
     
     persona_controller = PersonaController()
     programa_controller = ProgramaController()
-    #asignatura_controller = AsignaturaController()
+    asignatura_controller = AsignaturaController()
     
     while True:
             print("\n Opciones")
@@ -63,10 +88,24 @@ def main():
                      programa_controller.añadir_programa(codigo, nombre, Facultad, NumeroSemestres)
                      print("Programa agregado con éxito")     
     
+<<<<<<< HEAD
                  case "2":
                      if not programa_controller.get_programa():
                          print("Primero debe registrar al menos un programa académico.")
                          return
+=======
+                case "2":
+                    if not programa_controller.get_programa():
+                        print("Primero debe registrar al menos un programa académico.")
+                        return
+                    codigoA=input("Ingrese el código de la asignatura: ")
+                    nombreA=input("Ingrese el nombre de la asignatura: ")
+                    NumCreditos=int(input("Ingrese el número de créditos de la asignatura: "))
+                    ProgramaAcademico=elegir_programa(programa_controller.get_programa())
+                    
+                    asignatura_controller.añadir_asignatura(codigoA, nombreA, NumCreditos, ProgramaAcademico)
+                    print("Asignatura agregada con éxito")
+>>>>>>> 2743947aef9731d3c4a2babb0f3ba46d791725a3
     
                  case "3":
                     # if not programa_controller.get_programa():
@@ -107,15 +146,21 @@ def main():
                     persona_controller.añadir_administrativo(identificacion, nombre, correo, numero_empleado, dependencia, cargo, jornada)
                     print("Administrativo agregado con éxito")
     
-                # case "6":
+                case "6":
+                    mostrar_programas(programa_controller)
     
                  case "7":
                     mostrar_personas(persona_controller)
     
-                #case "8":
+                case "8":
+                    mostrar_asignaturas(asignatura_controller)
                 
+<<<<<<< HEAD
                  case "9":
                     
+=======
+                case "9":
+>>>>>>> 2743947aef9731d3c4a2babb0f3ba46d791725a3
                     if not persona_controller.get_persona():
                         print("No hay personas registradas")
                     else:
