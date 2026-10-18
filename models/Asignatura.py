@@ -1,8 +1,10 @@
+from models.Programa import Programa
+
 class Asignatura:
 
      def __init__(self, codigoA, nombreA, NumCreditos, ProgramaAcademico):
           self.set_codigo(codigoA)
-          self.set_nombre(nombreA)
+          self.set_nombreA(nombreA)
           self.set_NumCreditos(NumCreditos)
           self.set_ProgramaAcademico(ProgramaAcademico)
 
@@ -15,7 +17,6 @@ class Asignatura:
         else:
                raise ValueError("El codigo no puede estar vacio")
 
-
      def get_nombreA(self):
               return self._nombreA
     
@@ -24,7 +25,6 @@ class Asignatura:
                    self._nombreA = nombreA
             else:
                    raise ValueError("La nombre de la asignatura no puede estar vacio")
-
 
      def get_NumCreditos(self):
               return self._NumCreditos
@@ -39,14 +39,14 @@ class Asignatura:
                   return self._ProgramaAcademico
         
      def set_ProgramaAcademico(self, ProgramaAcademico):
-                if(ProgramaAcademico != ""):
+                if isinstance (ProgramaAcademico, Programa): #toma el objeto de la calse programa
                        self._ProgramaAcademico = ProgramaAcademico
                 else:
-                       raise ValueError("El programa academico no puede estar vacio")
+                       raise ValueError("La asignatura debe pertenecer a un programa académico existente")
 
      def mostrar_informacion(self):
             return ("Agisnatura\n"
                    f"Código de la Asignatura: {self.get_codigoA()}\n"
                    f"Nombre de la Asignatura: {self.get_nombreA()}\n"
                    f"Numero de Creditos: {self.get_NumCreditos()}\n"
-                   f"Programa academico: {self.get_ProgramaAcademico()}\n")
+                   f"Programa academico: {self.get_ProgramaAcademico().get_nombre()}\n")
