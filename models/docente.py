@@ -40,7 +40,7 @@ class Docente(Personas):
                      return self._Hsemanales
               
        def set_Hsemanales(self, Hsemanales):
-                     if(Hsemanales >= 0):
+                     if(Hsemanales > 0):
                             self._Hsemanales = Hsemanales
                      else:
                             raise ValueError("El número de horas semanales no puede ser menor o igual a cero")
