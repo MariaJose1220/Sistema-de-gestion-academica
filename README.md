@@ -30,7 +30,7 @@ permiten guardar y traer datos.
 ## Ejecución 
 Código para ejecutar:
 ```bash
-git clone <falta link>
+git clone <https://github.com/MariaJose1220/Sistema-de-gestion-academica.git>
 cd sistema-de-gestion-academica
 py main.py
 ```
