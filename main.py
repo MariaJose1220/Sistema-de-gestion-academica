@@ -49,7 +49,7 @@ def elegir_programa (lista):
 def elegir_persona (lista):
     print("Personas agregadas: ")
     for i, persona in enumerate(lista, start=1):
-        print(f"{i}.{Personas.get_nombre()}")
+        print(f"{i}.{personas.get_nombre()}")
     while True:
         opcion = int(input("Elija una opción: "))
         if 1 <= opcion <= len(lista):
