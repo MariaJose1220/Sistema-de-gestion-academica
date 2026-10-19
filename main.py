@@ -1,8 +1,7 @@
+
 from controllers.persona_controller import PersonaController
 from controllers.programa_controller import ProgramaController
 from controllers.asignatura_controller import AsignaturaController
-from models.programa import Programa
-from models.personas import Personas
 from demostracion import ejecutar_demostracion
 
 def mostrar_personas(persona_controller):
@@ -72,8 +71,8 @@ def main():
             print("7. Mostrar personas")
             print("8. Mostrar asignaturas")
             print("9. Cambiar correo de cualquier persona")
-            print("10. Salir")
-            print("11. Ejecutar demostracion")
+            print("10. Ejecutar demostracion")
+            print("11. Salir")
             
             option = input("Selecciona una opción: ")
             
@@ -161,11 +160,11 @@ def main():
                             print(f"Correo actual: {persona.get_correo()}")
                     
                      case "10":
+                        ejecutar_demostracion()
+                        
+                     case "11":
                         print(f"Vuelve pronto \n")
                         break
-
-                     case "11":
-                        ejecutar_demostracion()
                 
                      case _:
                         print("Opción inválida")

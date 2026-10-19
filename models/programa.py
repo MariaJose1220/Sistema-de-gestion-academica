@@ -13,7 +13,7 @@ class Programa:
         if(codigo != ""):
                self._codigo = codigo
         else:
-               raise ValueError("El codigo no puede estar vacio")
+               raise ValueError("El codigo no puede estar vacío")
         
      def get_Facultad(self):
                      return self._Facultad
@@ -22,7 +22,7 @@ class Programa:
               if(Facultad != ""):
                      self._Facultad = Facultad
               else:
-                     raise ValueError("La Facultad a la que pertenece el docente no puede estar vacia")
+                     raise ValueError("La Facultad a la que pertenece el programa no puede estar vacía")
 
      def get_nombre(self):
               return self._nombre
@@ -31,7 +31,7 @@ class Programa:
             if(nombre != ""):
                    self._nombre = nombre
             else:
-                   raise ValueError("La nombre de la asignatura no puede estar vacio")
+                   raise ValueError("El nombre del programa no puede estar vacío")
 
      def get_NumeroSemestres(self):
                   return self._NumeroSemestres
@@ -40,10 +40,10 @@ class Programa:
                 if(NumeroSemestres > 0):
                        self._NumeroSemestres = NumeroSemestres
                 else:
-                       raise ValueError("El numero de semestres debe ser mayor a cero")
+                       raise ValueError("El número de semestres debe ser mayor a cero")
 
      def mostrar_informacion(self):
-            return ("Programa Academico\n"
+            return ("Programa Académico\n"
                    f"Código del programa: {self.get_codigo()}\n"
                    f"Nombre del programa: {self.get_nombre()}\n"
                    f"Facultad: {self.get_Facultad()}\n"

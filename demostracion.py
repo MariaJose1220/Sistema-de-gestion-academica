@@ -1,9 +1,8 @@
-"""Demostración automática de las siete pruebas mínimas de la actividad.
+# Demostración automática de las siete pruebas mínimas de la actividad.
 
-Se ejecuta desde la opción del menú de main.py. Crea objetos con datos
-FICTICIOS y muestra, en orden, cada una de las pruebas que pide el documento,
-sin que el usuario tenga que escribir los datos a mano.
-"""
+# Se ejecuta desde la opción del menú de main.py. Crea objetos con datos
+# FICTICIOS y muestra, en orden, cada una de las pruebas que pide el documento,
+# sin que el usuario tenga que escribir los datos a mano.
 
 from models.programa import Programa
 from models.Asignatura import Asignatura
@@ -23,10 +22,8 @@ def ejecutar_demostracion():
     # ------------------------------------------------------------------
     titulo("PRUEBA 1. Creación de programas académicos y asignaturas")
     # ------------------------------------------------------------------
-    analitica = Programa("PA-001", "Ingeniería en Analítica de Datos",
-                         "Ciencias e Ingenierías", 10)
-    sistemas = Programa("PA-002", "Ingeniería de Sistemas",
-                        "Ciencias e Ingenierías", 10)
+    analitica = Programa("PA-001", "Ingeniería en Analítica de Datos", "Ciencias e Ingenierías", 10)
+    sistemas = Programa("PA-002", "Ingeniería de Sistemas","Ciencias e Ingenierías", 10)
     poo = Asignatura("AS-101", "Programación Orientada a Objetos", 3, analitica)
     estadistica = Asignatura("AS-102", "Estadística Descriptiva", 4, analitica)
     redes = Asignatura("AS-201", "Redes de Computadores", 3, sistemas)
@@ -38,28 +35,19 @@ def ejecutar_demostracion():
     # ------------------------------------------------------------------
     titulo("PRUEBA 2. Creación de seis personas (2 de cada tipo)")
     # ------------------------------------------------------------------
-    est_laura = Estudiante("1001", "Laura Gómez (ficticia)",
-                           "laura.gomez@correo.ejemplo.edu.co",
+    est_laura = Estudiante("1001", "Laura Gómez", "laura.gomez@correo.ejemplo.edu.co",
                            "EST-2024-01", analitica, 3, 4.25)
-    est_andres = Estudiante("1002", "Andrés Ríos (ficticio)",
-                            "andres.rios@correo.ejemplo.edu.co",
+    est_andres = Estudiante("1002", "Andrés Ríos", "andres.rios@correo.ejemplo.edu.co",
                             "EST-2023-07", sistemas, 5, 3.80)
-    doc_marta = Docente("2001", "Marta Salazar (ficticia)",
-                        "marta.salazar@correo.ejemplo.edu.co",
+    doc_marta = Docente("2001", "Marta Salazar", "marta.salazar@correo.ejemplo.edu.co",
                         "EMP-501", "Ciencias e Ingenierías", "Tiempo completo", 40)
-    doc_jorge = Docente("2002", "Jorge Castaño (ficticio)",
-                        "jorge.castano@correo.ejemplo.edu.co",
-                        "EMP-502", "Ciencias Contables, Económicas y Administrativas",
-                        "Cátedra", 12)
-    adm_paula = Administrativo("3001", "Paula Henao (ficticia)",
-                               "paula.henao@correo.ejemplo.edu.co",
+    doc_jorge = Docente("2002", "Jorge Castaño", "jorge.castano@correo.ejemplo.edu.co",
+                        "EMP-502", "Ciencias Contables, Económicas y Administrativas","Cátedra", 12)
+    adm_paula = Administrativo("3001", "Paula Henao", "paula.henao@correo.ejemplo.edu.co",
                                "EMP-801", "Registro Académico", "Coordinadora", "Diurna")
-    adm_carlos = Administrativo("3002", "Carlos Mejía (ficticio)",
-                                "carlos.mejia@correo.ejemplo.edu.co",
-                                "EMP-802", "Bienestar Universitario",
-                                "Auxiliar administrativo", "Mixta")
+    adm_carlos = Administrativo("3002", "Carlos Mejía", "carlos.mejia@correo.ejemplo.edu.co",
+                                "EMP-802", "Bienestar Universitario", "Auxiliar administrativo", "Mixta")
 
-    # Colección ÚNICA, con los tipos mezclados a propósito.
     personas = [est_laura, doc_marta, adm_paula, est_andres, doc_jorge, adm_carlos]
     print(f"Se crearon {len(personas)} personas en una única colección.")
 
