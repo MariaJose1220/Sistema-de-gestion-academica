@@ -3,7 +3,6 @@ class Personas:
         self.set_identificacion(identificacion)
         self.set_nombre(nombre)
         self.set_correo(correo)
-        print("Información agregada con éxito") #muestra el mensaje cada que se guarda informacion
         
     def get_identificacion(self):
         return self._identificacion
