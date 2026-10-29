@@ -1,4 +1,6 @@
-class Personas:
+from abc import ABC, abstractmethod
+
+class Personas(ABC):
     def __init__(self, identificacion, nombre, correo):
         self.set_identificacion(identificacion)
         self.set_nombre(nombre)
@@ -35,3 +37,7 @@ class Personas:
         return (f"Identificación: {self.get_identificacion()}\n"
                 f"Nombre: {self.get_nombre()}\n"
                 f"Correo: {self.get_correo()}")
+
+    @abstractmethod
+    def realizar_actividad_principal(self):
+        """se define este método como abstracto y obligatorio para las clases hijas"""
