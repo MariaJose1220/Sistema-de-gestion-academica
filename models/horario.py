@@ -42,3 +42,9 @@ class Horario:
         else: 
             raise ValueError ("El salón no puede ser vacío")
         
+    def mostrar_información(self):
+        return (f"Horario\n"
+                f"Día: {self.get_dia()}\n"
+                f"Hora de inicio: {self.get_hora_inicio()}\n"
+                f"Hora de finalización: {self.get_hora_fin()}\n"
+                f"Salón: {self.get_salon()}")

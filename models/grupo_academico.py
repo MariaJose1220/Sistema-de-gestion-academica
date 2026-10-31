@@ -55,3 +55,37 @@ class GrupoAcademico:
             self._horario = horario
         else: 
             raise ValueError("El horario debe ser un objeto existente")
+        
+    def mostrar_informacion_grupo(self):
+        return (f"Grupos académicos: \n"
+                f"Código del grupo: {self.get_codigo()}"
+                f"Asignatura ofrecida: {self.get_asignatura().get_nombreA()}"
+                f"Docente responsable: {self.get_docente().get_nombre()}"
+                f"Capacidad máxima: {self.get_capacidad_maxima()}"
+                f"Número de estudiantes: {len(self.estudiantes)}"
+                f"Horrario: {self.get_horario().mostrar_información()}")
+        
+    def matricular_estudiante(self, estudiante):
+        if estudiante in self.estudiantes:
+            print("El estudiante ya está matriculado") #aquí van las excepciones personalizadas
+            return 
+        if len(self.estudiantes) >= self.get_capacidad_maxima:
+            print("El grupo alcanzó su capacidad máxima")
+            return
+        self.estudiantes.append(estudiante)
+     
+    def retirar_estudiante(self, estudiante):
+        for a in self.estudiantes:
+            if estudiante.get_codigo_estudiantil() == a.get_codigo_estudiantil():
+                self.estudiantes.remove(estudiante)
+            return
+        print("El estudiante no está matriculado en el grupo.")
+        
+    def mostrar_estudiantes(self):
+        if not self.estudiantes:
+            print("No hay estudiantes matriculados en el grupo.")
+            return
+        print("Estudiantes en el grupo: \n")
+        for i, estudiante in enumerate(self.estudiantes, start=1):
+            print(f"{i}. {estudiante.mostrar_informacion()}\n")
+        

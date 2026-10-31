@@ -2,6 +2,12 @@
 from controllers.persona_controller import PersonaController
 from controllers.programa_controller import ProgramaController
 from controllers.asignatura_controller import AsignaturaController
+from controllers.grupo_controller import GrupoAcademicoController
+from controllers.horario_controller import HorarioController
+from models.docente import Docente
+from models.estudiante import Estudiante
+from models.grupo_academico import GrupoAcademico
+from models.horario import Horario
 from demostracion import ejecutar_demostracion
 
 def mostrar_personas(persona_controller):
@@ -54,11 +60,89 @@ def elegir_persona (lista):
         if 1 <= opcion <= len(lista):
             return lista[opcion - 1]
 
+def elegir_grupo (lista):
+    print("Grupos guardados: ")
+    for i, g in enumerate(lista, start=1):
+        print(f"{i}. Código:{GrupoAcademico.get_codigo(g)} - Asignatura: {GrupoAcademico.get_asignatura(g).get_nombre()}")
+    while True:
+        opcion = int(input("Elija una opción: "))
+        if 1 <= opcion <= len(lista):
+            return lista[opcion - 1]
+
+def elegir_estudiante (lista):
+    print("Estudiantes guardados: ")
+    for i, e in enumerate(lista, start=1):
+        if type(e)==Estudiante:
+            print(f"  {i}. Nombre: {Estudiante.get_nombre(e)} - Código estudiantil: {Estudiante.get_codigo_estudiantil(e)}")
+    while True:
+        opcion = int(input("Elija una opción: "))
+        if 1 <= opcion <= len(lista):
+            return lista[opcion - 1]
+        
+def agregar_horario(horario_controller):
+    dia=input("Ingrese el día: ")
+    hora_inicio=input("Ingrese la hora de inicio: ")
+    hora_fin=input("Ingrese la hora de fin: ")
+    salon=input("Ingrese el salón: ")
+
+    horario_controller.añadir_horario(dia, hora_inicio, hora_fin, salon)
+    print("Horario agregado con éxito")
+
+def menu_grupo_academico(horario_controller, grupo_controller, asignatura_controller, persona_controller):
+    
+    while True:
+        print("\n Nuevo grupo académico")
+        print("1. Agregar un horario")
+        print("2. Agregar un grupo académico")
+        print("3. Matricular un estudiante")
+        print("4. Retirar un estudiante")
+        print("5. Mostrar estudiantes matriculados")
+        print("6. Mostrar horarios")
+        print("7. Salir")
+            
+        option = input("Slecciona una opción: ")
+        match option: 
+            case "1":
+                agregar_horario(horario_controller)
+
+            case "2":
+                """agregar_grupo(grupo_controller, horario_controller, asignatura_controller, persona_controller)"""
+                
+            case "3":
+                if not grupo_controller.get_grupos():
+                    print("Primero debe registrar al menos un grupo académico.")
+                    continue
+                grupo=elegir_grupo(grupo_controller.get_grupos())
+                estudiante=elegir_estudiante(persona_controller.get_persona())
+                grupo.matricular_estudiante(estudiante)
+            
+            case "4":
+                if not grupo_controller.get_grupos():
+                    print("Primero debe registrar al menos un grupo académico.")
+                    continue
+                grupo=elegir_grupo(grupo_controller.get_grupos())
+                estudiante=elegir_estudiante(persona_controller.get_persona())
+                grupo.retirar_estudiante(estudiante)
+                
+            case "5":
+                if not grupo_controller.get_grupos():
+                    print("Primero debe registrar al menos un grupo académico.")
+                    continue
+                grupo=elegir_grupo(grupo_controller.get_grupos())
+                grupo.mostrar_estudiantes()
+            
+            #case "6":
+            
+            case "7":
+                return
+
 def main():
     
     persona_controller = PersonaController()
     programa_controller = ProgramaController()
     asignatura_controller = AsignaturaController()
+    horario_controller = HorarioController()
+    grupo_controller = GrupoAcademicoController()
     
     while True:
             print("\n Opciones")
@@ -67,12 +151,13 @@ def main():
             print("3. Agregar estudiante")
             print("4. Agregar docente")
             print("5. Agregar administrativo")
-            print("6. Mostrar programas académicos")
-            print("7. Mostrar personas")
-            print("8. Mostrar asignaturas")
-            print("9. Cambiar correo de cualquier persona")
-            print("10. Ejecutar demostracion")
-            print("11. Salir")
+            print("6. Agregar grupo académico")
+            print("7. Mostrar programas académicos")
+            print("8. Mostrar personas")
+            print("9. Mostrar asignaturas")
+            print("10. Cambiar correo de cualquier persona")
+            print("11. Ejecutar demostracion")
+            print("12. Salir")
             
             option = input("Selecciona una opción: ")
             
@@ -142,15 +227,18 @@ def main():
                         print("Administrativo agregado con éxito")
     
                      case "6":
+                        menu_grupo_academico(horario_controller, grupo_controller, asignatura_controller, persona_controller)
+                    
+                     case "7":
                         mostrar_programas(programa_controller)
     
-                     case "7":
+                     case "8":
                         mostrar_personas(persona_controller)
     
-                     case "8":
+                     case "9":
                         mostrar_asignaturas(asignatura_controller)
                 
-                     case "9":
+                     case "10":
                         if not persona_controller.get_persona():
                             print("No hay personas registradas")
                         else:
@@ -159,10 +247,10 @@ def main():
                             print()
                             print(f"Correo actual: {persona.get_correo()}")
                     
-                     case "10":
+                     case "11":
                         ejecutar_demostracion()
                         
-                     case "11":
+                     case "12":
                         print(f"Vuelve pronto \n")
                         break
                 
