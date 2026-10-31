@@ -4,7 +4,7 @@ class GrupoAcademicoController:
     def __init__(self):
         self.grupos = []
         
-    def añadir_grupo(self, codigo, asignatura, docente, capacidad_maxima, horario):
+    def agregar_grupo(self, codigo, asignatura, docente, capacidad_maxima, horario):
         grupo=GrupoAcademico(codigo, asignatura, docente, capacidad_maxima, horario)
         self.grupos.append(grupo)
         

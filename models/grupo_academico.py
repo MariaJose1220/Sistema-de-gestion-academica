@@ -1,6 +1,7 @@
 from models.Asignatura import Asignatura
 from models.docente import Docente
 from models.horario import Horario
+from models.excepciones import EstudianteYaMatriculadoError,CapacidadMaximaError
 
 class GrupoAcademico:
     def __init__(self, codigo, asignatura, docente, capacidad_maxima, horario):
@@ -66,12 +67,17 @@ class GrupoAcademico:
                 f"Horrario: {self.get_horario().mostrar_información()}")
         
     def matricular_estudiante(self, estudiante):
-        if estudiante in self.estudiantes:
-            print("El estudiante ya está matriculado") #aquí van las excepciones personalizadas
-            return 
-        if len(self.estudiantes) >= self.get_capacidad_maxima:
-            print("El grupo alcanzó su capacidad máxima")
-            return
+        for est in self.estudiantes:
+            if est.get_identificacion()== estudiante.get_identificacion():
+
+                raise EstudianteYaMatriculadoError(
+                    f"{estudiante.get_identificacion()}"
+                    )
+            
+        if len(self.estudiantes) >= self.get_capacidad_maxima():
+            raise CapacidadMaximaError(
+            "El grupo alcanzó su capacidad máxima."
+        )
         self.estudiantes.append(estudiante)
      
     def retirar_estudiante(self, estudiante):

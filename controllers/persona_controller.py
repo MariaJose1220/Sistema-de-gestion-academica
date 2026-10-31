@@ -9,6 +9,13 @@ class PersonaController:
         self.personas = [] #se crea la lista
 
     def añadir_estudiante(self, identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado):
+        
+        for persona in self.personas:
+            if persona.get_identificacion() == identificacion:
+                raise ValueError(
+                f"Ya existe una persona con identificación {identificacion}"
+            )
+        
         estudiante=Estudiante(identificacion, nombre, correo, codigo_estudiantil, programa, semestre, promedio_acumulado)
         self.personas.append(estudiante)
         
