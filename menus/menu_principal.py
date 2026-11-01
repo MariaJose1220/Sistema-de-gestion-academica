@@ -1,9 +1,5 @@
 from menus.menu_secundario import menu_grupo_academico
-from menus.metodos import elegir_persona, mostrar_asignaturas, mostrar_personas, mostrar_programas, elegir_programa
-from models.docente import Docente
-from models.estudiante import Estudiante
-from models.grupo_academico import GrupoAcademico
-from models.asignatura import Asignatura
+from menus.metodos import elegir_persona, mostrar_asignaturas, mostrar_personas, mostrar_programas, elegir_programa 
 from demostracion import ejecutar_demostracion
 from demostracion_ac2 import ejecutar_pruebas_ac2
 from models.excepciones import (AsignaturaNoEncontradaError,ProgramaNoEncontradoError,SistemaAcademicoError
@@ -102,7 +98,7 @@ def mostrar (
       print("1. Mostrar programas académicos")
       print("2. Mostrar personas")
       print("3. Mostrar asignaturas")
-      print("4. Regresar al menu anterior")
+      print("4. Regresar al menú anterior")
       
       option = input("Selecciona una opción: ")
       
@@ -127,7 +123,7 @@ def buscar (
       print("\n Que elemento quiere buscar")
       print("1. Buscar asignatura " )
       print("2. Buscar programas académicos")
-      print("3. Volver al menu anterior")
+      print("3. Volver al menú anterior")
       
       option = input("Selecciona una opción: ")
       
@@ -162,13 +158,13 @@ def menu_principal(
     grupo_controller
 ):
     while True:
-       print("\n Bienvenido a sus sistema de gestion academica")
-       print("\n Seleccione la funcion desea realizar")
+       print("\n Bienvenido a su sistema de gestión académica")
+       print("\n Seleccione la función desea realizar")
        print("1. Agregar " )
        print("2. Mostrar")
        print("3. Buscar")
        print("4. Cambiar correo de cualquier persona")
-       print("5. Ejecutar demostracion AC1")
+       print("5. Ejecutar demostración AC1")
        print("6. Ejecutar pruebas AC2")
        print("7. Salir")
        
