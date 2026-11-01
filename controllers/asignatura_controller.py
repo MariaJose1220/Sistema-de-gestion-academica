@@ -16,6 +16,6 @@ class AsignaturaController:
         for asignatura in self.asignaturas:
             if asignatura.get_codigoA() == codigo:
                 return asignatura
-            raise AsignaturaNoEncontradaError(
+        raise AsignaturaNoEncontradaError(
             f"No existe una asignatura con código {codigo}"
         )
