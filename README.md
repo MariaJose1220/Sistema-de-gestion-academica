@@ -1,5 +1,5 @@
 # Sistema de Gestión Académica con Programación Orientada a Objetos
-Proyecto de la Actividad colaborativa N.º 1 — Universidad de Manizales.
+Proyecto de la Actividad colaborativa N.º 1 y N.º 2 — Universidad de Manizales.
 
 Sistema en Python que modela personas, programas académicos, asignaturas y grupos académicos de una institución educativa. En la **Actividad 1** se aplicaron clases, encapsulamiento, herencia, sobrescritura y polimorfismo. En la **Actividad 2** el mismo proyecto evolucionó con **clases abstractas**, **composición** y **excepciones personalizadas**, para gestionar la oferta de grupos y la matrícula de estudiantes.
  
@@ -8,7 +8,7 @@ Sistema en Python que modela personas, programas académicos, asignaturas y grup
 - Laura Fernanda Pérez Galvis - @Laferpg
 - Juan Camilo Pérez Oviedo - @juankp86
 
-  ## Versiones entregadas
+## Versiones entregadas
 - `v1.0-actividad1`: versión entregada en la Actividad Colaborativa 1.
 - `Entrega_AC2`: versión entregada en la Actividad Colaborativa 2.
 
@@ -47,6 +47,8 @@ git clone https://github.com/MariaJose1220/Sistema-de-gestion-academica.git
 cd Sistema-de-gestion-academica
 python main.py
 ```
+(en Windows también funciona `py main.py`)
+
 Al ejecutarlo se muestra el menú principal. Los datos se escriben por teclado y se guardan en memoria mientras el programa esté abierto:
  
 1. **Agregar:** programa académico, asignatura, estudiante, docente, administrativo, o entrar al **submenú de grupos académicos** (agregar un grupo con su horario, matricular un estudiante, retirar un estudiante, mostrar los estudiantes matriculados y mostrar los grupos).
