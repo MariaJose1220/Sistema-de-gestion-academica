@@ -18,7 +18,7 @@ Sistema en Python que modela personas, programas académicos, asignaturas y grup
 ~ main.py                           -> Archivo principal: inicia el sistema
 ~ demostracion.py                   -> Demostración de las 7 pruebas de la Actividad 1
 ~ demostracion_ac2.py               -> Demostración de las 11 pruebas de la Actividad 2
-~ Documento_de_Decisiones_de_Diseno.docx -> Documento de decisiones de diseño (Actividad 2)
+~ Documento de Decisiones de Diseño.docx -> Documento de decisiones de diseño (Actividad 2)
 ~ README.md
 ~ menus
    - menu_principal.py              -> Menú principal y submenús de agregar, mostrar y buscar
@@ -121,5 +121,7 @@ La opción **6** del menú principal ejecuta las 11 pruebas mínimas de la Activ
 La opción **5** ejecuta las 7 pruebas de la Actividad 1.
  
 ## Declaración de uso de inteligencia artificial
-El uso de herramientas de inteligencia artificial en la Actividad 2 se declara en el **Documento de Decisiones de Diseño**. En la Actividad 1, el equipo utilizó Claude como herramienta de apoyo para comprender conceptos, revisar errores y proponer datos de ejemplo y fragmentos de código. El equipo revisó, probó y comprende el código entregado, y puede explicarlo.
- 
+El equipo utilizó Claude como herramienta de apoyo en este proyecto para: comprender conceptos, revisar errores y proponer datos ejemplo 
+y fragmentos de código. 
+
+El equipo revisó, probó y comprende el código entregado, y puede explicarlo.
