@@ -1,95 +1,123 @@
 # Sistema de Gestión Académica con Programación Orientada a Objetos
 Proyecto de la Actividad colaborativa N.º 1 — Universidad de Manizales.
 
-Sistema en Python que modela personas, programas y asignaturas de una institución educativa, aplicando clases, encapsulamiento, herencia, sobrescritura y polimorfismo.
+Sistema en Python que modela personas, programas académicos, asignaturas y grupos académicos de una institución educativa. En la **Actividad 1** se aplicaron clases, encapsulamiento, herencia, sobrescritura y polimorfismo. En la **Actividad 2** el mismo proyecto evolucionó con **clases abstractas**, **composición** y **excepciones personalizadas**, para gestionar la oferta de grupos y la matrícula de estudiantes.
  
 ## Nombre de los integrantes
 - María José Osorio Giraldo - @MariaJose1220
 - Laura Fernanda Pérez Galvis - @Laferpg
 - Juan Camilo Pérez Oviedo - @juankp86
 
+  ## Versiones entregadas
+- `v1.0-actividad1`: versión entregada en la Actividad Colaborativa 1.
+- `Entrega_AC2`: versión entregada en la Actividad Colaborativa 2.
+
 ## Estructura del proyecto
-En nuestra carpeta encontramos un archivo principal main.py donde se ejecuta el programa, una carpeta llamada models donde se guardan los archivos correspondientes a cada clase del sistema y una carpeta llamada controllers que contiene archivos con clases que 
-permiten guardar y traer datos.
+`main.py` solo crea los controladores e inicia el menú. Los menús y las funciones auxiliares están organizados en la carpeta `menus`, las clases del sistema en `models` y las clases que guardan y buscan los objetos en `controllers`.
 ```
-~ controllers
-   - asignatura_controller.py       -> Controlador de la clase asignatura 
-   - persona_controller.py          -> Controlador de la clase personas y sus clases hijas     
-   - programa_controller.py         -> Controlador de la clase programa académico     
-~ models
-    - Asignatura.py                 -> Clase asignatura
-    - administrativo.py             -> Clase hija de personas
-    - docente.py                    -> Clase hija de personas
-    - estudiante.py                 -> Clase hija de personas
-    - personas.py                   -> Clase base personas
-    - Programa.py                   -> Clase programa académico
+~ main.py                           -> Archivo principal: inicia el sistema
+~ demostracion.py                   -> Demostración de las 7 pruebas de la Actividad 1
+~ demostracion_ac2.py               -> Demostración de las 11 pruebas de la Actividad 2
+~ Documento_de_Decisiones_de_Diseno.docx -> Documento de decisiones de diseño (Actividad 2)
 ~ README.md
-~ demostracion.py                   -> Clase con ejemplos y pruebas para demostrar correcto funcionamiento
-~ main.py                           -> Archivo principal ejecutable
+~ menus
+   - menu_principal.py              -> Menú principal y submenús de agregar, mostrar y buscar
+   - menu_secundario.py             -> Submenú de grupos académicos (agregar, matricular, retirar)
+   - metodos.py                     -> Funciones auxiliares para elegir y mostrar objetos
+~ controllers
+   - persona_controller.py          -> Guarda estudiantes, docentes y administrativos en una sola lista
+   - programa_controller.py         -> Guarda y busca programas académicos
+   - asignatura_controller.py       -> Guarda y busca asignaturas
+   - grupo_controller.py            -> Guarda los grupos académicos
+~ models
+   - personas.py                    -> Clase abstracta Personas
+   - estudiante.py                  -> Clase hija de Personas
+   - docente.py                     -> Clase hija de Personas
+   - administrativo.py              -> Clase hija de Personas
+   - programa.py                    -> Clase Programa académico
+   - asignatura.py                  -> Clase Asignatura (asociada a un programa)
+   - horario.py                     -> Clase Horario (forma parte de un grupo)
+   - grupo_academico.py             -> Clase GrupoAcademico
+   - excepciones.py                 -> Excepciones personalizadas del sistema
 ```
 ## Ejecución 
-Código para ejecutar:
+Requiere Python 3.10 o superior (el menú usa `match`). No se necesitan librerías externas.
 ```bash
-git clone <https://github.com/MariaJose1220/Sistema-de-gestion-academica.git>
-cd sistema-de-gestion-academica
-py main.py
+git clone https://github.com/MariaJose1220/Sistema-de-gestion-academica.git
+cd Sistema-de-gestion-academica
+python main.py
 ```
-Al ejecutar el archivo principal se muestra un menú con 11 opciones para que el usuario elija qué acción desea realizar, los datos se 
-escriben por teclado y se guardan en memoria mientras el programa esté abierto: 
-
-Se puede agregar un objeto a las diferentes clases como programa, asignatura, estudiante, docente y administrativo (opciones 1 a 5);
-también puede ver los objetos que ha agregado a cada clase (opciones 6 a 8), en este caso las clases estudiante, docente y administrativo
-se muestran en una misma acción ya que todas son personas, también se realizan los metodos de realizar_actividad_principal()
-correspondientes para cada tipo de persona y, aunque todas están en una misma lista, el sistema reconoce qué tipo de persona es y realiza
-el método correcto; para validar modificaciones se puede seleccionar cambiar un correo (opción 9) donde el usuario selecciona la persona y posteriormente cambia el correo, allí se verifica si es vacío y de ser así no lo guarda; por otro lado, si desea ver las 7 pruebas de 
-funcionamiento sin necesidad de ingresar todos los objetos y realizar todo a mano, puede elegir ejecutar las pruebas de funcionamiento 
-(opción 10) donde se verifica la creación de objetos en todas las clases como ejemplo, se realizan métodos como mostrar_informacion(), 
-mostar_actividad_principal() y también getters y setters, se realizan verificaciones al modificar datos válidos, se verifica que no 
-guarda modificaciones de datos inválidos y se realiza un recorrido polimórfico de personas; por último, puede seleccionar salir del menú (opción 11).
-
-## Conceptos aplicados 
-### Encapsulamiento y validaciones (fase 2) 
-Los atributos son privados (se llaman con guion bajo, por ejemplo 'self._nombre') y solo se leen o modifican mediante métodos 
-get() y set(). Los setters validan el dato y lanzan `ValueError` si no cumple (por ejemplo, que no esté vacío), los getters permiten 
-llamar y leer el atributo. Los constructores también usan los setters, de modo que no se puede crear un objeto con datos inválidos.
+Al ejecutarlo se muestra el menú principal. Los datos se escriben por teclado y se guardan en memoria mientras el programa esté abierto:
  
-#### Validaciones principales:
+1. **Agregar:** programa académico, asignatura, estudiante, docente, administrativo, o entrar al **submenú de grupos académicos** (agregar un grupo con su horario, matricular un estudiante, retirar un estudiante, mostrar los estudiantes matriculados y mostrar los grupos).
+2. **Mostrar:** programas, personas y asignaturas. Al mostrar las personas, cada una presenta sus datos y realiza su actividad principal.
+3. **Buscar:** asignatura o programa académico por código.
+4. **Cambiar el correo** de cualquier persona.
+5. **Ejecutar la demostración de la Actividad 1** (7 pruebas).
+6. **Ejecutar las pruebas de la Actividad 2** (11 pruebas, con todas las excepciones).
+7. **Salir.**
+Primero se debe registrar un programa académico, porque las asignaturas y los estudiantes pertenecen a uno. Para crear un grupo se necesitan al menos una asignatura y un docente.
+
+## Conceptos aplicados — Actividad 1
  
-- El correo, el nombre y la identificación no pueden estar vacíos
-- El número de semestres de un programa debe ser un entero mayor que cero
-- Los créditos de una asignatura debe ser un entero mayor que cero
-- El promedio acumulado de un estudiante debe estar entre 0.0 y 5.0
-- Las horas semanales de un docente deben ser un entero mayor que cero
-  
-En el archivo de demostración se usa 'try/except' para atrapar errores, mostrar el mensaje y continuar sin detener el programa.
-
-### Herencia (fase 3)
-Como las clases 'Estudiante', 'Docente' y 'Administrativo' tienen atributos y métodos en común, heredan los atributos y comportamientos de la clase 'Persona' para evitar repetirlos en cada una de estas clases, así que los reutilizan y agregan los propios de su rol. 
-Cada constructor en cada clase llama a super().__init__(identificacion, nombre, correo) para inicializar la parte heredada.
-
-### Sobrescritura (fase 4)
-Las tres clases hijas de personas sobreescriben el método mostrar_informacion() que existe en Persona ya que reutilizan la parte de la 
-clase base con super() y agregan los datos correspondientes de cada rol.
+### Encapsulamiento y validaciones
+Los atributos se escriben con un guion bajo (por ejemplo `self._nombre`), lo que indica por convención que no deben usarse directamente desde fuera de la clase. Se leen y modifican mediante métodos get y set. Los setters validan el dato y lanzan `ValueError` si no cumple. Los constructores también usan los setters, de modo que no se puede crear un objeto con datos inválidos.
  
-Además, cada clase hija implementa realizar_actividad_principal() con el mismo nombre pero con un comportamiento propio, este método 
-no existe en Persona, sino que se define de forma independiente en cada una de las tres clases.
-
-### Polimorfismo (fase 5)
-En persona_controller.py las personas registradas (estudiantes, docentes y administrativos) se guardan en una sola lista y la opción 
-7 del menú la recorre sin condicionales que revisen el tipo. La opción 10 carga seis personas de ejemplo (dos de cada tipo) para 
-probarlo rápidamente, ejecuta automáticamente el método que corresponde al tipo real de cada objeto y así el mismo código produce
-resultados distintos según se trate de un estudiante, un docente o un administrativo.
-
-## Pruebas sugeridas
-1. Registrar un programa y una asignatura con datos válidos y consultarlos (opciones 1,2,6 y 8)
-2. Intentar registrar con valores inválidos: semestres = 0, créditos = -2, correo vacío, promedio = 7.5 y saldrá el error
-3. Modificar un correo válido y luego uno vacío (opción 9): el dato inválido se rechaza y se conserva el anterior
-4. Registrar un estudiante, un docente y un administrativo (opciones 3 a 5)
-5. Mostrar las personas (opción 7) y observar cómo cada tipo responde distinto al mismo método.
-
+Validaciones principales: el correo, el nombre y la identificación no pueden estar vacíos; el número de semestres, los créditos, las horas semanales de un docente y la capacidad de un grupo deben ser mayores que cero; el promedio acumulado debe estar entre 0.0 y 5.0.
+ 
+### Herencia
+`Estudiante`, `Docente` y `Administrativo` heredan de `Personas` los atributos y comportamientos comunes (identificación, nombre, correo y sus validaciones) y agregan los propios de su rol. Cada constructor llama a `super().__init__(identificacion, nombre, correo)`.
+ 
+### Sobrescritura
+Las tres clases hijas sobrescriben `mostrar_informacion()`: reutilizan la versión de `Personas` con `super()` y agregan sus datos. Además, cada una implementa `realizar_actividad_principal()` con un comportamiento propio.
+ 
+### Polimorfismo
+Las personas se guardan en una sola lista en `PersonaController`. La función `mostrar_personas()` (`menus/metodos.py`) la recorre con un único ciclo, sin condicionales que revisen el tipo, y Python ejecuta automáticamente el método que corresponde a la clase real de cada objeto.
+ 
+## Conceptos aplicados — Actividad 2
+ 
+### Clase abstracta
+No tiene sentido registrar una persona sin saber si es estudiante, docente o administrativo. Por eso `Personas` hereda de `ABC` y define `realizar_actividad_principal()` como método abstracto (`@abstractmethod`). Así, Python impide crear objetos directamente de `Personas` (lanza `TypeError`), y cada clase hija está obligada a implementar su actividad principal.
+ 
+### Grupo académico
+`GrupoAcademico` recibe objetos ya creados de `Asignatura` y `Docente` (no sus nombres como texto), guarda la capacidad máxima y la lista de estudiantes matriculados, y ofrece los métodos `mostrar_informacion_grupo()`, `matricular_estudiante(estudiante)`, `retirar_estudiante(codigo_estudiantil)` y `mostrar_estudiantes()`.
+ 
+### Composición: por qué el grupo contiene un horario
+El horario describe cuándo y dónde se desarrolla un grupo, y no tiene sentido por sí solo. Por eso el constructor de `GrupoAcademico` recibe el día, la hora de inicio, la hora de finalización y el salón, y **crea el objeto `Horario` dentro del grupo**. El horario nace con el grupo y le pertenece solo a él: es una relación de **composición** («el grupo tiene un horario»). El horario es un objeto con sus propios atributos y métodos, no una cadena de texto.
+ 
+**Por qué no es herencia:** la herencia expresa una relación «es un» (un estudiante *es una* persona). Un grupo académico *no es* un horario, ni un horario es un tipo de grupo; el grupo *tiene* un horario. Si `GrupoAcademico` heredara de `Horario`, el grupo sería un tipo de horario, lo cual no describe la realidad.
+ 
+En cambio, la asignatura y el docente existen antes y después del grupo: el grupo solo los referencia (agregación).
+ 
+### Excepciones personalizadas
+Se definen en `models/excepciones.py`. Todas heredan de `SistemaAcademicoError` (que hereda de `Exception`):
+ 
+| Excepción | Situación | Dónde se lanza |
+|---|---|---|
+| `EstudianteYaMatriculadoError` | El estudiante ya está matriculado en el grupo | `GrupoAcademico.matricular_estudiante()` |
+| `CapacidadMaximaError` | El grupo alcanzó su capacidad máxima | `GrupoAcademico.matricular_estudiante()` |
+| `EstudianteNoMatriculadoError` | El estudiante a retirar no está matriculado | `GrupoAcademico.retirar_estudiante()` |
+| `AsignaturaNoEncontradaError` | La asignatura buscada no existe | `AsignaturaController.buscar_asignatura()` |
+| `ProgramaNoEncontradoError` | El programa académico buscado no existe | `ProgramaController.buscar_programa()` |
+ 
+Cada una se lanza con `raise` desde el método donde ocurre la situación, se captura con `try/except` en los menús y en `demostracion_ac2.py`, muestra un mensaje comprensible y el programa continúa.
+ 
+## Pruebas
+La opción **6** del menú principal ejecuta las 11 pruebas mínimas de la Actividad 2:
+ 
+1. No se puede crear directamente una persona.
+2. Creación de asignaturas, docentes, estudiantes y horarios.
+3. Creación de dos grupos académicos.
+4. Matrícula correcta de estudiantes.
+5. Intento de matricular un estudiante duplicado.
+6. Intento de superar la capacidad de un grupo.
+7. Retiro correcto de un estudiante.
+8. Intento de retirar un estudiante que no está matriculado.
+9. Búsqueda de una asignatura inexistente.
+10. Búsqueda de un programa inexistente.
+11. Continuidad del programa después de cada excepción.
+La opción **5** ejecuta las 7 pruebas de la Actividad 1.
+ 
 ## Declaración de uso de inteligencia artificial
-El equipo utilizó Claude como herramienta de apoyo en este proyecto para: comprender conceptos, revisar errores y proponer datos ejemplo
-para creación de clases.
-
-El equipo revisó, probó, comprende el código entregado y puede explicarlo.
-
+El uso de herramientas de inteligencia artificial en la Actividad 2 se declara en el **Documento de Decisiones de Diseño**. En la Actividad 1, el equipo utilizó Claude como herramienta de apoyo para comprender conceptos, revisar errores y proponer datos de ejemplo y fragmentos de código. El equipo revisó, probó y comprende el código entregado, y puede explicarlo.
+ 
