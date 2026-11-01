@@ -11,7 +11,7 @@ from models.horario import Horario
 from models.asignatura import Asignatura
 from demostracion import ejecutar_demostracion
 from models.excepciones import (EstudianteYaMatriculadoError,
-    CapacidadMaximaError,EstudianteNoMatriculadoError
+    CapacidadMaximaError,EstudianteNoMatriculadoError,AsignaturaNoEncontradaError
 )
 
 def mostrar_personas(persona_controller):
@@ -235,9 +235,10 @@ def main():
             print("7. Mostrar programas académicos")
             print("8. Mostrar personas")
             print("9. Mostrar asignaturas")
-            print("10. Cambiar correo de cualquier persona")
-            print("11. Ejecutar demostracion")
-            print("12. Salir")
+            print("10. Buscar Asignaturas")
+            print("11. Cambiar correo de cualquier persona")
+            print("12. Ejecutar demostracion")
+            print("13. Salir")
             
             option = input("Selecciona una opción: ")
             
@@ -317,8 +318,18 @@ def main():
     
                      case "9":
                         mostrar_asignaturas(asignatura_controller)
-                
+                        
                      case "10":
+                        codigo = input(
+                             "Ingrese el código de la asignatura a buscar: "
+                             )
+                        try:
+                            asignatura = asignatura_controller.buscar_asignatura(codigo)
+                            print(asignatura.mostrar_informacion())
+                        except AsignaturaNoEncontradaError as e:
+                            print(e)
+                
+                     case "11":
                         if not persona_controller.get_persona():
                             print("No hay personas registradas")
                         else:
@@ -327,10 +338,10 @@ def main():
                             print()
                             print(f"Correo actual: {persona.get_correo()}")
                     
-                     case "11":
+                     case "12":
                         ejecutar_demostracion()
                         
-                     case "12":
+                     case "13":
                         print(f"Vuelve pronto \n")
                         break
                 
