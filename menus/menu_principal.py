@@ -3,17 +3,16 @@ from menus.metodos import elegir_persona, mostrar_asignaturas, mostrar_personas,
 from models.docente import Docente
 from models.estudiante import Estudiante
 from models.grupo_academico import GrupoAcademico
-from models.horario import Horario
 from models.asignatura import Asignatura
 from demostracion import ejecutar_demostracion
-from models.excepciones import (AsignaturaNoEncontradaError,ProgramaNoEncontradoError
+from demostracion_ac2 import ejecutar_pruebas_ac2
+from models.excepciones import (AsignaturaNoEncontradaError,ProgramaNoEncontradoError,SistemaAcademicoError
 )
 
 def agregar(
             persona_controller,
             programa_controller,
             asignatura_controller,
-            horario_controller,
             grupo_controller
 ):
     while True:
@@ -87,7 +86,7 @@ def agregar(
               print("Administrativo agregado con éxito")
             
            case "6":
-              menu_grupo_academico(horario_controller, grupo_controller, asignatura_controller, persona_controller)
+              menu_grupo_academico(grupo_controller, asignatura_controller, persona_controller)
 
            case "7":
               return
@@ -160,7 +159,6 @@ def menu_principal(
     persona_controller,
     programa_controller,
     asignatura_controller,
-    horario_controller,
     grupo_controller
 ):
     while True:
@@ -170,8 +168,9 @@ def menu_principal(
        print("2. Mostrar")
        print("3. Buscar")
        print("4. Cambiar correo de cualquier persona")
-       print("5. Ejecutar demostracion")
-       print("6. Salir")
+       print("5. Ejecutar demostracion AC1")
+       print("6. Ejecutar pruebas AC2")
+       print("7. Salir")
        
        option = input("Selecciona una opción: ")
             
@@ -184,7 +183,6 @@ def menu_principal(
                            persona_controller,
                            programa_controller,
                            asignatura_controller,
-                           horario_controller,
                            grupo_controller
                            )
                      
@@ -214,11 +212,15 @@ def menu_principal(
                         ejecutar_demostracion()
                         
                      case "6":
+                        ejecutar_pruebas_ac2()
+
+                     case "7":
                         print(f"Vuelve pronto \n")
                         break
                 
                      case _:
                         print("Opción inválida")
+       except SistemaAcademicoError as error:
+                print(f"[{type(error).__name__}] {error}")
        except ValueError as error:
                 print(f"Dato inválido: {error}. No se guardaron los cambios.")
-
