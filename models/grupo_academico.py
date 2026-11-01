@@ -1,7 +1,7 @@
-from models.Asignatura import Asignatura
+from models.asignatura import Asignatura
 from models.docente import Docente
 from models.horario import Horario
-from models.excepciones import EstudianteYaMatriculadoError,CapacidadMaximaError
+from models.excepciones import EstudianteYaMatriculadoError,CapacidadMaximaError,EstudianteNoMatriculadoError
 
 class GrupoAcademico:
     def __init__(self, codigo, asignatura, docente, capacidad_maxima, horario):
@@ -71,8 +71,9 @@ class GrupoAcademico:
             if est.get_identificacion()== estudiante.get_identificacion():
 
                 raise EstudianteYaMatriculadoError(
-                    f"{estudiante.get_identificacion()}"
-                    )
+                    f"El estudiante con identificación "
+                    f"{estudiante.get_identificacion()} ya está matriculado."
+                )
             
         if len(self.estudiantes) >= self.get_capacidad_maxima():
             raise CapacidadMaximaError(
@@ -80,12 +81,19 @@ class GrupoAcademico:
         )
         self.estudiantes.append(estudiante)
      
+
     def retirar_estudiante(self, estudiante):
         for a in self.estudiantes:
             if estudiante.get_codigo_estudiantil() == a.get_codigo_estudiantil():
-                self.estudiantes.remove(estudiante)
-            return
-        print("El estudiante no está matriculado en el grupo.")
+                self.estudiantes.remove(a)
+                return (
+                    f"El estudiante {estudiante.get_identificacion()} "
+                    f"fue retirado correctamente del grupo."
+                    )
+        raise EstudianteNoMatriculadoError(
+        f"El estudiante con identificación {estudiante.get_identificacion()} no está matriculado en el grupo."
+          )
+
         
     def mostrar_estudiantes(self):
         if not self.estudiantes:

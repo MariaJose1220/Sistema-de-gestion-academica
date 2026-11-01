@@ -5,7 +5,7 @@
 # sin que el usuario tenga que escribir los datos a mano.
 
 from models.programa import Programa
-from models.Asignatura import Asignatura
+from models.asignatura import Asignatura
 from models.estudiante import Estudiante
 from models.docente import Docente
 from models.administrativo import Administrativo

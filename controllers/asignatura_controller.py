@@ -1,4 +1,4 @@
-from models.Asignatura import Asignatura
+from models.asignatura import Asignatura
 
 class AsignaturaController:
     def __init__(self):

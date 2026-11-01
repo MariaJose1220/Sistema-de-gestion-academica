@@ -8,7 +8,11 @@ from models.docente import Docente
 from models.estudiante import Estudiante
 from models.grupo_academico import GrupoAcademico
 from models.horario import Horario
+from models.asignatura import Asignatura
 from demostracion import ejecutar_demostracion
+from models.excepciones import (EstudianteYaMatriculadoError,
+    CapacidadMaximaError,EstudianteNoMatriculadoError
+)
 
 def mostrar_personas(persona_controller):
     personas = persona_controller.get_persona()
@@ -63,7 +67,7 @@ def elegir_persona (lista):
 def elegir_grupo (lista):
     print("Grupos guardados: ")
     for i, g in enumerate(lista, start=1):
-        print(f"{i}. Código:{GrupoAcademico.get_codigo(g)} - Asignatura: {GrupoAcademico.get_asignatura(g).get_nombre()}")
+        print(f"{i}. Código:{GrupoAcademico.get_codigo(g)} - Asignatura: {GrupoAcademico.get_asignatura(g).get_nombreA()}")
     while True:
         opcion = int(input("Elija una opción: "))
         if 1 <= opcion <= len(lista):
@@ -88,6 +92,69 @@ def agregar_horario(horario_controller):
     horario_controller.añadir_horario(dia, hora_inicio, hora_fin, salon)
     print("Horario agregado con éxito")
 
+def elegir_docente (lista):
+    print("Docente responsable: ")
+    for i, docente in enumerate(lista, start=1):
+        if type(docente)==Docente:
+            print(f"  {i}. Nombre: {Docente.get_nombre(docente)} - Número de empleado: {Docente.get_NumEmpleado(docente)}")
+    while True:
+        opcion = int(input("Elija una opción: "))
+        if 1 <= opcion <= len(lista):
+            return lista[opcion - 1]
+
+def elegir_asignatura(lista):
+    print("Asignatura ofrecida: ")
+    for i, asignatura in enumerate(lista, start=1):
+        print(f"{i}. Nombre: {asignatura.get_nombreA()} - Código: {asignatura.get_codigoA()}")
+    while True:
+        opcion = int(input("Elija una opción: "))
+        if 1 <= opcion <= len(lista):
+            return lista[opcion - 1]
+        
+def elegir_horario (lista):
+    print("Horario correspondiente: ")
+    for i, horario in enumerate(lista, start=1):
+        print(f"  {i}. Día: {Horario.get_dia(horario)} - Hora de inicio: {Horario.get_hora_inicio(horario)} "
+              f"- Hora de finalización: {Horario.get_hora_fin(horario)} - Salón: {Horario.get_salon(horario)}")
+    while True:
+            opcion = int(input("Elija una opción: "))
+            if 1 <= opcion <= len(lista):
+                return lista[opcion - 1]
+
+def mostrar_horarios(horario_controller):
+
+    horarios = horario_controller.get_horario()
+
+    if not horarios:
+        print("No se han reguistrado horarios")
+        return
+
+    for horario in horarios:
+        print(horario.mostrar_información())
+        print("-" * 20)
+
+def agregar_grupo(grupo_controller, horario_controller, asignatura_controller, persona_controller):
+    if not any(type(objeto)== Docente for objeto in persona_controller.get_persona()):
+        print("Primero debe registrar al menos un docente.")
+        return
+    if not horario_controller.get_horario():
+        print("Primero debe registrar al menos un horario.")
+        return
+    if not asignatura_controller.get_asignatura():
+        print("Primero debe registrar al menos una asignatura.")
+        return
+    
+    codigo=input("Ingrese el códgio del grupo académico: ")
+    asignatura = elegir_asignatura(asignatura_controller.get_asignatura())
+    docente=elegir_docente(persona_controller.get_persona())
+    capacidad_maxima=int(input("Ingrese la cantidad máxima de estudiantes: "))
+    horario=elegir_horario(horario_controller.get_horario())
+    
+    grupo_controller.añadir_grupo(codigo, asignatura, docente, capacidad_maxima, horario)
+    print("Gurpo académico agregado con éxito") 
+
+
+
 def menu_grupo_academico(horario_controller, grupo_controller, asignatura_controller, persona_controller):
     
     while True:
@@ -106,7 +173,7 @@ def menu_grupo_academico(horario_controller, grupo_controller, asignatura_contro
                 agregar_horario(horario_controller)
 
             case "2":
-                """agregar_grupo(grupo_controller, horario_controller, asignatura_controller, persona_controller)"""
+                agregar_grupo(grupo_controller, horario_controller, asignatura_controller, persona_controller)
                 
             case "3":
                 if not grupo_controller.get_grupos():
@@ -114,15 +181,27 @@ def menu_grupo_academico(horario_controller, grupo_controller, asignatura_contro
                     continue
                 grupo=elegir_grupo(grupo_controller.get_grupos())
                 estudiante=elegir_estudiante(persona_controller.get_persona())
-                grupo.matricular_estudiante(estudiante)
+                try:
+                    grupo.matricular_estudiante(estudiante)
+                    print("Estudiante matriculado con éxito")
+                except EstudianteYaMatriculadoError as e:
+                    print(e)
+                except CapacidadMaximaError as e:
+                    print(e)
             
             case "4":
-                if not grupo_controller.get_grupos():
-                    print("Primero debe registrar al menos un grupo académico.")
-                    continue
-                grupo=elegir_grupo(grupo_controller.get_grupos())
-                estudiante=elegir_estudiante(persona_controller.get_persona())
-                grupo.retirar_estudiante(estudiante)
+                  if not grupo_controller.get_grupos():
+                      print("Primero debe registrar al menos un grupo académico.")
+                      continue
+                  grupo = elegir_grupo(grupo_controller.get_grupos())
+                  estudiante = elegir_estudiante(
+                      persona_controller.get_persona()
+                      )
+                  try:
+                      mensaje = grupo.retirar_estudiante(estudiante)
+                      print(mensaje)
+                  except EstudianteNoMatriculadoError as e:
+                      print(e)
                 
             case "5":
                 if not grupo_controller.get_grupos():
@@ -131,7 +210,8 @@ def menu_grupo_academico(horario_controller, grupo_controller, asignatura_contro
                 grupo=elegir_grupo(grupo_controller.get_grupos())
                 grupo.mostrar_estudiantes()
             
-            #case "6":
+            case "6":
+                mostrar_horarios(horario_controller)
             
             case "7":
                 return
